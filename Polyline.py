@@ -2,29 +2,23 @@
 
 import simplegui
 
-polyline = []
+# Define canvas size
+CANVAS_WIDTH = 300
+CANVAS_HEIGHT = 300
 
+# Create a polyline with three points
+polyline = simplegui.PolyLine([(10, 10), (50, 50), (90, 10)], 3)
 
-def click(pos):
-    global polyline
-    polyline.append(pos)
-
-
-def clear():
-    global polyline
-    polyline = []
-
-
+# Draw the polyline on the canvas
 def draw(canvas):
-    if len(polyline) == 1:
-        canvas.draw_point(polyline[0], "White")
-    for i in range(1, len(polyline)):
-        canvas.draw_line(polyline[i - 1], polyline[i], 2, "White")
+  canvas.draw_polyline(polyline, "Red")
 
-
-frame = simplegui.create_frame("Echo click", 300, 200)
-frame.set_mouseclick_handler(click)
+# Create a frame and register the draw handler
+frame = simplegui.create_frame("Polyline", CANVAS_WIDTH, CANVAS_HEIGHT)
 frame.set_draw_handler(draw)
-frame.add_button("Clear", clear)
 
+# Start the frame
 frame.start()
+
+#You can adjust the points of the polyline by modifying the PolyLine constructor,
+#and you can change the color of the line by modifying the second argument to the canvas.draw_polyline method.
